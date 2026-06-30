@@ -1,0 +1,36 @@
+{
+  "studio": {
+    "name": "Fox & Finch Media",
+    "tagline": "Digital marketing studio",
+    "heroTitle": "Marketing video, made to be watched.",
+    "heroLead": "Pulse & Pixel is a video-first marketing team turning campaigns, product launches, and social content into stories people actually finish watching.",
+    "stats": [
+      { "num": "120+", "label": "Videos produced" },
+      { "num": "38", "label": "Brands served" },
+      { "num": "4.6×", "label": "Avg. engagement lift" }
+    ]
+  },
+  "contact": {
+    "email": "hello@pulseandpixel.studio",
+    "phone": "+91 00000 00000",
+    "social": "@pulseandpixel"
+  },
+  "services": [
+    { "title": "Video production", "description": "Scripting, filming, and editing for ads, brand films, and social content." },
+    { "title": "Social strategy", "description": "Content calendars, channel growth, and community management." },
+    { "title": "Paid media", "description": "Meta, TikTok, and Google Ads campaigns built around performance." },
+    { "title": "Content & SEO", "description": "Search-optimized content that keeps working long after launch." }
+  ],
+  "team": [
+    { "initials": "AR", "name": "Aisha Rao", "role": "Founder & Strategist", "bio": "Leads brand strategy and client partnerships." },
+    { "initials": "DM", "name": "Diego Marin", "role": "Creative Director", "bio": "Shapes the visual style of every video we ship." },
+    { "initials": "SK", "name": "Sara Kim", "role": "Lead Editor", "bio": "Cuts, color, and sound design across all reels." },
+    { "initials": "JT", "name": "Jay Thomas", "role": "Paid Media Lead", "bio": "Runs ad spend and performance reporting." }
+  ],
+  "testimonials": [
+    { "quote": "Pulse & Pixel turned our launch video around in two weeks and it became our best-performing ad of the year.", "name": "Nina Cole", "company": "Northstar Coffee" },
+    { "quote": "The team understood our brand voice instantly. Every edit felt like it was made by someone on our own staff.", "name": "Raj Patel", "company": "Aerolite" },
+    { "quote": "Our engagement rate nearly tripled within the first month of working with them on social content.", "name": "Ella Wong", "company": "Glow Skincare" }
+  ],
+  "videos": []
+}

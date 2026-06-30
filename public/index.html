@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fox & Finch Media — Digital Marketing Studio</title>
+<meta name="description" content="Fox & Finch Media is a video-first digital marketing studio.">
+<meta property="og:title" content="Fox & Finch Media — Digital Marketing Studio">
+<meta property="og:description" content="Video-first digital marketing studio — portfolio, services, and team.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#1B1A17; --paper:#FAF8F4; --line: rgba(27,26,23,0.12); --muted: rgba(27,26,23,0.6); --accent:#B5482A; --max: 1180px; }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ background:var(--paper); color:var(--ink); font-family:'Inter', sans-serif; font-size:16px; -webkit-font-smoothing:antialiased; }
+  h1,h2,h3{ font-family:'Fraunces', serif; font-weight:500; line-height:1.05; letter-spacing:-0.01em; }
+  a{color:inherit; text-decoration:none;}
+  .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
+  .eyebrow{ font-size:12px; font-weight:600; letter-spacing:0.14em; text-transform:uppercase; color:var(--accent); }
+  .btn{ display:inline-flex; align-items:center; gap:8px; font-weight:500; font-size:14.5px; padding:13px 24px; border-radius:2px; border:1px solid var(--ink); background:var(--ink); color:var(--paper); cursor:pointer; transition: opacity .2s ease; }
+  .btn:hover{ opacity:0.78; }
+  .btn.outline{ background:transparent; color:var(--ink); border:1px solid var(--line); }
+  .btn.outline:hover{ border-color:var(--ink); opacity:1; background:rgba(27,26,23,0.04); }
+  .btn:focus-visible, a:focus-visible, button:focus-visible{ outline:2px solid var(--accent); outline-offset:3px; }
+
+  header{ position:sticky; top:0; z-index:50; background:rgba(250,248,244,0.92); backdrop-filter: blur(6px); border-bottom:1px solid var(--line); }
+  nav.wrap{ display:flex; align-items:center; justify-content:space-between; height:78px; }
+  .logo{ font-family:'Fraunces', serif; font-weight:600; font-size:20px; display:flex; align-items:center; gap:10px; }
+  .logo .dot{ color:var(--accent); }
+  .logo img{ height:34px; width:auto; display:block; }
+  .navlinks{display:flex; gap:36px; font-weight:500; font-size:14px;}
+  .navlinks a{ color:var(--muted); transition:color .2s ease; }
+  .navlinks a:hover{ color:var(--ink); }
+  .burger{display:none; font-size:22px; background:none; border:none; cursor:pointer;}
+  @media (max-width:880px){ .navlinks{display:none;} header .btn{display:none;} .burger{display:block;} }
+
+  .hero{ padding:120px 0 100px; border-bottom:1px solid var(--line); }
+  .hero-grid{ display:grid; grid-template-columns: 1fr 0.62fr; gap:70px; align-items:end; }
+  .hero h1{ font-size:clamp(40px, 5.6vw, 72px); margin:22px 0 28px; max-width:680px; }
+  .hero p.lead{ font-size:18px; line-height:1.55; max-width:480px; color:var(--muted); margin-bottom:36px; }
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .stat-col{ border-top:1px solid var(--line); padding-top:24px; display:flex; flex-direction:column; gap:22px; }
+  .stat-col div{display:flex; justify-content:space-between; align-items:baseline;}
+  .stat-col .num{ font-family:'Fraunces'; font-size:30px; font-weight:500;}
+  .stat-col .lab{ font-size:12.5px; color:var(--muted); text-align:right; max-width:140px; }
+  @media (max-width:880px){ .hero-grid{ grid-template-columns:1fr; } .hero{ padding:80px 0 60px; } }
+
+  .section{ padding:100px 0; border-bottom:1px solid var(--line); }
+  .section:last-of-type{ border-bottom:none; }
+  .sec-head{ display:grid; grid-template-columns: 1fr 1fr; gap:40px; align-items:end; margin-bottom:60px; }
+  .sec-head h2{ font-size:clamp(28px,3.6vw,42px); margin-top:12px; }
+  .sec-head p{ color:var(--muted); font-size:16px; line-height:1.55; }
+  @media (max-width:780px){ .sec-head{ grid-template-columns:1fr; } }
+
+  .grid-work{ display:grid; grid-template-columns:repeat(3, 1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .vcard{ background:var(--paper); }
+  .vthumb{ position:relative; aspect-ratio:4/3; background:#ECE7DE; overflow:hidden; }
+  .vthumb video{ width:100%; height:100%; object-fit:cover; display:block; background:#000; }
+  .vthumb .badge{ position:absolute; bottom:12px; right:12px; font-size:11px; font-weight:500; color:var(--ink); background:var(--paper); border:1px solid var(--line); padding:3px 8px; border-radius:2px; }
+  .vbody{ padding:22px 24px 28px; }
+  .vbody .tag{ font-size:11px; font-weight:600; letter-spacing:.08em; text-transform:uppercase; color:var(--accent); }
+  .vbody h3{ font-size:18px; margin-top:9px; font-weight:500; }
+  .vbody p{ font-size:13.5px; color:var(--muted); margin-top:6px; }
+  @media (max-width:980px){ .grid-work{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:600px){ .grid-work{ grid-template-columns:1fr; } }
+  .empty-state{ padding:60px 30px; text-align:center; color:var(--muted); font-size:14.5px; grid-column:1/-1; }
+
+  .services-list{ border-top:1px solid var(--line); }
+  .srow{ display:grid; grid-template-columns: 60px 1fr 1.4fr; gap:32px; align-items:baseline; padding:30px 0; border-bottom:1px solid var(--line); }
+  .srow .num{ font-size:13px; color:var(--muted); font-family:'Fraunces'; }
+  .srow h3{ font-size:21px; font-weight:500; }
+  .srow p{ font-size:15px; color:var(--muted); line-height:1.55; }
+  @media (max-width:700px){ .srow{ grid-template-columns:1fr; gap:8px; } }
+
+  .team-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:36px; }
+  .mphoto{ aspect-ratio:4/5; display:flex; align-items:center; justify-content:center; font-family:'Fraunces'; font-size:32px; font-weight:500; background:#ECE7DE; margin-bottom:16px; }
+  .mbody h3{ font-size:16.5px; font-weight:500; }
+  .mbody .role{ font-size:12.5px; font-weight:600; color:var(--accent); margin:5px 0 9px; text-transform:uppercase; letter-spacing:.04em; }
+  .mbody p.bio{ font-size:13.5px; color:var(--muted); line-height:1.5; }
+  @media (max-width:980px){ .team-grid{ grid-template-columns:repeat(2,1fr); } }
+  @media (max-width:560px){ .team-grid{ grid-template-columns:1fr; } }
+
+  .t-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--line); border:1px solid var(--line); }
+  .tcard{ background:var(--paper); padding:32px 28px; }
+  .tcard p.txt{ font-family:'Fraunces'; font-size:18px; font-weight:400; line-height:1.45; margin-bottom:26px; }
+  .tcard .who .name{ font-weight:600; font-size:13.5px; }
+  .tcard .who .co{ font-size:12.5px; color:var(--muted); margin-top:2px; }
+  @media (max-width:980px){ .t-grid{ grid-template-columns:1fr; } }
+
+  .contact-wrap{ display:grid; grid-template-columns: 0.85fr 1.15fr; gap:70px; align-items:start; }
+  .contact-info h2{ font-size:clamp(30px,3.8vw,44px); }
+  .contact-info p{ margin:18px 0 30px; color:var(--muted); font-size:15.5px; line-height:1.6; max-width:400px; }
+  .clink{ display:flex; align-items:center; gap:12px; font-weight:500; font-size:14.5px; padding:16px 0; border-top:1px solid var(--line); }
+  .clink:last-child{ border-bottom:1px solid var(--line); }
+  .clink .ico{ color:var(--accent); font-size:13px; width:30px; }
+  form{ padding-top:4px; }
+  .field{ margin-bottom:22px; }
+  .field label{ display:block; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.06em; margin-bottom:9px; color:var(--muted); }
+  .field input, .field textarea{ width:100%; border:none; border-bottom:1px solid var(--line); padding:10px 2px; font-family:'Inter'; font-size:15px; background:transparent; color:var(--ink); }
+  .field input:focus, .field textarea:focus{ outline:none; border-bottom:1px solid var(--ink); }
+  .field textarea{ resize:vertical; min-height:90px; }
+  .row2{ display:grid; grid-template-columns:1fr 1fr; gap:24px; }
+  @media (max-width:880px){ .contact-wrap{ grid-template-columns:1fr; } .row2{ grid-template-columns:1fr; } }
+  .formnote{ font-size:13px; margin-top:16px; color:var(--muted); display:none; }
+  .formnote.show{ display:block; }
+
+  footer{ padding:44px 0 36px; }
+  .foot-grid{ display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:20px; padding-bottom:28px; border-bottom:1px solid var(--line); }
+  .footlinks{ display:flex; gap:30px; font-size:13.5px; font-weight:500; color:var(--muted); }
+  .footlinks a:hover{ color:var(--ink); }
+  .footbottom{ display:flex; justify-content:space-between; padding-top:22px; font-size:12.5px; color:var(--muted); flex-wrap:wrap; gap:10px; }
+  @media (prefers-reduced-motion: reduce){ *{ animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body>
+
+<header>
+  <nav class="wrap">
+    <div class="logo" id="navLogo">Loading…</div>
+    <div class="navlinks">
+      <a href="#work">Work</a><a href="#services">Services</a><a href="#team">Team</a><a href="#testimonials">Clients</a><a href="#contact">Contact</a>
+    </div>
+    <a href="#contact" class="btn">Start a project</a>
+    <button class="burger" aria-label="menu">☰</button>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <span class="eyebrow" id="heroEyebrow"></span>
+      <h1 id="heroTitle"></h1>
+      <p class="lead" id="heroLead"></p>
+      <div class="hero-ctas">
+        <a href="#work" class="btn">See our work</a>
+        <a href="#team" class="btn outline">Meet the team</a>
+      </div>
+    </div>
+    <div class="stat-col" id="statCol"></div>
+  </div>
+</section>
+
+<section class="section" id="work">
+  <div class="wrap">
+    <div class="sec-head">
+      <div><span class="eyebrow">Selected work</span><h2>Video portfolio</h2></div>
+      <p>A mix of brand films, paid social cuts, and product launch videos.</p>
+    </div>
+    <div class="grid-work" id="videoGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">What we do</span><h2>Services</h2></div><p>From strategy to the final export, we handle every stage of a campaign.</p></div>
+    <div class="services-list" id="servicesList"></div>
+  </div>
+</section>
+
+<section class="section" id="team">
+  <div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Who we are</span><h2>The team</h2></div><p>A small crew of strategists, editors, and creators behind every project.</p></div>
+    <div class="team-grid" id="teamGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="testimonials">
+  <div class="wrap">
+    <div class="sec-head"><div><span class="eyebrow">Client words</span><h2>Testimonials</h2></div><p>What clients say after working with us.</p></div>
+    <div class="t-grid" id="testimonialGrid"></div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap contact-wrap">
+    <div class="contact-info">
+      <span class="eyebrow">Get in touch</span>
+      <h2>Let's make something worth watching.</h2>
+      <p>Tell us about your brand and what you're trying to launch. We typically reply within one business day.</p>
+      <div id="contactLinks"></div>
+    </div>
+    <form id="contactForm">
+      <div class="row2">
+        <div class="field"><label for="name">Name</label><input id="name" type="text" placeholder="Your name" required></div>
+        <div class="field"><label for="email">Email</label><input id="email" type="email" placeholder="you@company.com" required></div>
+      </div>
+      <div class="field"><label for="company">Company</label><input id="company" type="text" placeholder="Your brand or company"></div>
+      <div class="field"><label for="message">Message</label><textarea id="message" placeholder="What are you looking to create?" required></textarea></div>
+      <button type="submit" class="btn" style="width:100%; justify-content:center; margin-top:8px;">Send message</button>
+      <p class="formnote" id="formNote">Thanks — this is a demo form. Connect it to your email service or backend to receive messages.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="logo" id="footLogo"></div>
+      <div class="footlinks"><a href="#work">Work</a><a href="#services">Services</a><a href="#team">Team</a><a href="#contact">Contact</a></div>
+    </div>
+    <div class="footbottom">
+      <span id="footCopy"></span>
+      <span>Built for showcasing digital marketing work.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+async function loadContent(){
+  const res = await fetch('/api/content');
+  const c = await res.json();
+
+  document.title = c.studio.name + ' — ' + c.studio.tagline;
+  document.getElementById('navLogo').innerHTML = `<img src="/assets/logo.png" alt="${c.studio.name} logo"> ${c.studio.name}`;
+  document.getElementById('footLogo').innerHTML = document.getElementById('navLogo').innerHTML;
+  document.getElementById('heroEyebrow').textContent = c.studio.tagline;
+  document.getElementById('heroTitle').textContent = c.studio.heroTitle;
+  document.getElementById('heroLead').textContent = c.studio.heroLead;
+  document.getElementById('footCopy').textContent = `© 2026 ${c.studio.name}. All rights reserved.`;
+
+  document.getElementById('statCol').innerHTML = c.studio.stats.map(s =>
+    `<div><span class="num">${s.num}</span><span class="lab">${s.label}</span></div>`
+  ).join('');
+
+  // Videos
+  const videoGrid = document.getElementById('videoGrid');
+  if (!c.videos || c.videos.length === 0){
+    videoGrid.innerHTML = `<div class="empty-state">No videos uploaded yet. Add some from the admin panel.</div>`;
+  } else {
+    videoGrid.innerHTML = c.videos.map(v => `
+      <div class="vcard">
+        <div class="vthumb">
+          <video src="${v.url}" controls preload="metadata"></video>
+          ${v.duration ? `<span class="badge">${v.duration}</span>` : ''}
+        </div>
+        <div class="vbody">
+          <span class="tag">${v.tag}</span>
+          <h3>${v.title}</h3>
+          <p>${v.description}</p>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  // Services
+  document.getElementById('servicesList').innerHTML = c.services.map((s,i) => `
+    <div class="srow">
+      <span class="num">${String(i+1).padStart(2,'0')}</span>
+      <h3>${s.title}</h3>
+      <p>${s.description}</p>
+    </div>
+  `).join('');
+
+  // Team
+  document.getElementById('teamGrid').innerHTML = c.team.map(m => `
+    <div class="member">
+      <div class="mphoto">${m.initials}</div>
+      <div class="mbody">
+        <h3>${m.name}</h3>
+        <div class="role">${m.role}</div>
+        <p class="bio">${m.bio}</p>
+      </div>
+    </div>
+  `).join('');
+
+  // Testimonials
+  document.getElementById('testimonialGrid').innerHTML = c.testimonials.map(t => `
+    <div class="tcard">
+      <p class="txt">${t.quote}</p>
+      <div class="who"><div class="name">${t.name}</div><div class="co">${t.company}</div></div>
+    </div>
+  `).join('');
+
+  // Contact
+  document.getElementById('contactLinks').innerHTML = `
+    <a class="clink" href="mailto:${c.contact.email}"><span class="ico">Mail</span> ${c.contact.email}</a>
+    <a class="clink" href="tel:${c.contact.phone.replace(/\s/g,'')}"><span class="ico">Tel</span> ${c.contact.phone}</a>
+    <a class="clink" href="#"><span class="ico">IG</span> ${c.contact.social}</a>
+  `;
+}
+loadContent();
+
+document.getElementById('contactForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  document.getElementById('formNote').classList.add('show');
+});
+</script>
+
+</body>
+</html>

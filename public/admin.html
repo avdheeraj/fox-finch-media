@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Pulse & Pixel</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#1B1A17; --paper:#FAF8F4; --line: rgba(27,26,23,0.15); --muted: rgba(27,26,23,0.6); --accent:#B5482A; }
+  *{box-sizing:border-box;}
+  body{ font-family:'Inter',sans-serif; background:var(--paper); color:var(--ink); margin:0; padding:0 0 80px; }
+  h1,h2{ font-family:'Fraunces',serif; font-weight:600; }
+  .wrap{ max-width:880px; margin:0 auto; padding:0 28px; }
+  header{ border-bottom:1px solid var(--line); padding:24px 0; margin-bottom:40px; display:flex; justify-content:space-between; align-items:center; }
+  header h1{ font-size:22px; }
+  .btn{ font-family:'Inter'; font-size:14px; font-weight:500; padding:10px 18px; border-radius:3px; border:1px solid var(--ink); background:var(--ink); color:var(--paper); cursor:pointer; }
+  .btn.outline{ background:transparent; color:var(--ink); }
+  .btn.danger{ background:#a33; border-color:#a33; color:#fff; }
+  section.card{ border:1px solid var(--line); border-radius:6px; padding:28px; margin-bottom:28px; background:#fff8; }
+  section.card h2{ font-size:18px; margin-bottom:18px; }
+  label{ display:block; font-size:12px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:var(--muted); margin-bottom:6px; margin-top:16px; }
+  input, textarea, select{ width:100%; padding:10px 12px; border:1px solid var(--line); border-radius:4px; font-family:'Inter'; font-size:14.5px; background:#fff; }
+  textarea{ min-height:70px; resize:vertical; }
+  .row{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+  .video-item{ display:flex; gap:16px; padding:14px 0; border-bottom:1px solid var(--line); align-items:center; }
+  .video-item video{ width:120px; height:80px; object-fit:cover; border-radius:4px; background:#000; }
+  .video-meta{ flex:1; }
+  .video-meta .t{ font-weight:600; font-size:14.5px; }
+  .video-meta .s{ font-size:12.5px; color:var(--muted); margin-top:3px; }
+  .team-item, .testimonial-item, .service-item{ border:1px solid var(--line); border-radius:6px; padding:16px; margin-bottom:14px; position:relative; }
+  .remove-btn{ position:absolute; top:10px; right:10px; font-size:12px; color:#a33; background:none; border:none; cursor:pointer; font-weight:600; }
+  .msg{ font-size:13px; margin-top:10px; padding:10px 12px; border-radius:4px; display:none; }
+  .msg.show{ display:block; }
+  .msg.ok{ background:#e6f4ea; color:#1a6b34; }
+  .msg.err{ background:#fbe7e7; color:#a33; }
+  #loginScreen{ max-width:360px; margin:120px auto; }
+  .progress{ height:6px; background:var(--line); border-radius:3px; overflow:hidden; margin-top:10px; display:none; }
+  .progress.show{ display:block; }
+  .progress-bar{ height:100%; background:var(--accent); width:0%; transition:width .15s ease; }
+  .add-btn{ font-size:13px; font-weight:600; color:var(--accent); background:none; border:none; cursor:pointer; padding:0; }
+</style>
+</head>
+<body>
+
+<div id="loginScreen" class="wrap">
+  <h1 style="margin-bottom:18px;">Admin login</h1>
+  <label for="loginUser">Username</label>
+  <input id="loginUser" type="text" value="admin">
+  <label for="loginPass">Password</label>
+  <input id="loginPass" type="password">
+  <button class="btn" style="margin-top:20px; width:100%;" onclick="login()">Log in</button>
+  <div class="msg err" id="loginMsg"></div>
+</div>
+
+<div id="adminScreen" class="wrap" style="display:none;">
+  <header>
+    <h1>Site admin</h1>
+    <button class="btn outline" onclick="logout()">Log out</button>
+  </header>
+
+  <section class="card">
+    <h2>Upload a video</h2>
+    <label for="vTitle">Title</label>
+    <input id="vTitle" type="text" placeholder="e.g. Launch: Northstar Coffee">
+    <div class="row">
+      <div><label for="vTag">Category tag</label><input id="vTag" type="text" placeholder="e.g. Brand film"></div>
+      <div><label for="vDuration">Duration label</label><input id="vDuration" type="text" placeholder="e.g. 00:45"></div>
+    </div>
+    <label for="vDesc">Description</label>
+    <textarea id="vDesc" placeholder="e.g. Instagram Reels campaign · +280% saves"></textarea>
+    <label for="vFile">Video file (mp4, webm, mov, mkv — up to 500MB)</label>
+    <input id="vFile" type="file" accept="video/mp4,video/webm,video/quicktime,video/x-matroska">
+    <div class="progress" id="uploadProgress"><div class="progress-bar" id="uploadProgressBar"></div></div>
+    <button class="btn" style="margin-top:18px;" onclick="uploadVideo()">Upload video</button>
+    <div class="msg" id="uploadMsg"></div>
+  </section>
+
+  <section class="card">
+    <h2>Current videos</h2>
+    <div id="videoList"></div>
+  </section>
+
+  <section class="card">
+    <h2>Studio info</h2>
+    <label for="sName">Studio name</label><input id="sName" type="text">
+    <label for="sTagline">Tagline</label><input id="sTagline" type="text">
+    <label for="sHeroTitle">Hero title</label><input id="sHeroTitle" type="text">
+    <label for="sHeroLead">Hero description</label><textarea id="sHeroLead"></textarea>
+    <button class="btn" style="margin-top:18px;" onclick="saveStudio()">Save studio info</button>
+    <div class="msg" id="studioMsg"></div>
+  </section>
+
+  <section class="card">
+    <h2>Contact details</h2>
+    <label for="cEmail">Email</label><input id="cEmail" type="text">
+    <label for="cPhone">Phone</label><input id="cPhone" type="text">
+    <label for="cSocial">Social handle</label><input id="cSocial" type="text">
+    <button class="btn" style="margin-top:18px;" onclick="saveContact()">Save contact info</button>
+    <div class="msg" id="contactMsg"></div>
+  </section>
+
+  <section class="card">
+    <h2>Team</h2>
+    <div id="teamList"></div>
+    <button class="add-btn" onclick="addTeamMember()">+ Add team member</button>
+    <button class="btn" style="margin-top:18px; display:block;" onclick="saveTeam()">Save team</button>
+    <div class="msg" id="teamMsg"></div>
+  </section>
+
+  <section class="card">
+    <h2>Testimonials</h2>
+    <div id="testimonialList"></div>
+    <button class="add-btn" onclick="addTestimonial()">+ Add testimonial</button>
+    <button class="btn" style="margin-top:18px; display:block;" onclick="saveTestimonials()">Save testimonials</button>
+    <div class="msg" id="testimonialMsg"></div>
+  </section>
+</div>
+
+<script>
+let contentCache = null;
+
+async function checkAuth(){
+  const r = await fetch('/api/me');
+  const d = await r.json();
+  if (d.loggedIn){
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
+    await loadAll();
+  }
+}
+
+async function login(){
+  const username = document.getElementById('loginUser').value;
+  const password = document.getElementById('loginPass').value;
+  const r = await fetch('/api/login', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({username,password}) });
+  const d = await r.json();
+  const msg = document.getElementById('loginMsg');
+  if (d.success){
+    msg.classList.remove('show');
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('adminScreen').style.display = 'block';
+    await loadAll();
+  } else {
+    msg.textContent = d.error || 'Login failed';
+    msg.classList.add('show');
+  }
+}
+
+async function logout(){
+  await fetch('/api/logout', { method:'POST' });
+  location.reload();
+}
+
+async function loadAll(){
+  const r = await fetch('/api/content');
+  contentCache = await r.json();
+  renderVideos();
+  document.getElementById('sName').value = contentCache.studio.name;
+  document.getElementById('sTagline').value = contentCache.studio.tagline;
+  document.getElementById('sHeroTitle').value = contentCache.studio.heroTitle;
+  document.getElementById('sHeroLead').value = contentCache.studio.heroLead;
+  document.getElementById('cEmail').value = contentCache.contact.email;
+  document.getElementById('cPhone').value = contentCache.contact.phone;
+  document.getElementById('cSocial').value = contentCache.contact.social;
+  renderTeam();
+  renderTestimonials();
+}
+
+function renderVideos(){
+  const list = document.getElementById('videoList');
+  if (!contentCache.videos.length){
+    list.innerHTML = '<p style="color:var(--muted); font-size:14px;">No videos uploaded yet.</p>';
+    return;
+  }
+  list.innerHTML = contentCache.videos.map(v => `
+    <div class="video-item">
+      <video src="${v.url}" muted></video>
+      <div class="video-meta">
+        <div class="t">${v.title}</div>
+        <div class="s">${v.tag} · ${v.description} ${v.duration ? '· '+v.duration : ''}</div>
+      </div>
+      <button class="btn danger" onclick="deleteVideo('${v.id}')">Delete</button>
+    </div>
+  `).join('');
+}
+
+async function uploadVideo(){
+  const fileInput = document.getElementById('vFile');
+  const msg = document.getElementById('uploadMsg');
+  if (!fileInput.files.length){
+    msg.textContent = 'Choose a video file first.'; msg.className='msg err show'; return;
+  }
+  const fd = new FormData();
+  fd.append('video', fileInput.files[0]);
+  fd.append('title', document.getElementById('vTitle').value);
+  fd.append('tag', document.getElementById('vTag').value);
+  fd.append('description', document.getElementById('vDesc').value);
+  fd.append('duration', document.getElementById('vDuration').value);
+
+  const progress = document.getElementById('uploadProgress');
+  const bar = document.getElementById('uploadProgressBar');
+  progress.classList.add('show'); bar.style.width = '0%';
+
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/videos');
+  xhr.upload.onprogress = (e) => { if (e.lengthComputable) bar.style.width = (e.loaded/e.total*100)+'%'; };
+  xhr.onload = async () => {
+    progress.classList.remove('show');
+    if (xhr.status === 200){
+      msg.textContent = 'Video uploaded.'; msg.className='msg ok show';
+      document.getElementById('vTitle').value=''; document.getElementById('vTag').value='';
+      document.getElementById('vDesc').value=''; document.getElementById('vDuration').value=''; fileInput.value='';
+      await loadAll();
+    } else {
+      const d = JSON.parse(xhr.responseText || '{}');
+      msg.textContent = d.error || 'Upload failed.'; msg.className='msg err show';
+    }
+  };
+  xhr.send(fd);
+}
+
+async function deleteVideo(id){
+  if (!confirm('Delete this video?')) return;
+  await fetch('/api/videos/'+id, { method:'DELETE' });
+  await loadAll();
+}
+
+async function saveStudio(){
+  const body = {
+    studio: {
+      ...contentCache.studio,
+      name: document.getElementById('sName').value,
+      tagline: document.getElementById('sTagline').value,
+      heroTitle: document.getElementById('sHeroTitle').value,
+      heroLead: document.getElementById('sHeroLead').value
+    }
+  };
+  await saveContent(body, 'studioMsg');
+}
+
+async function saveContact(){
+  const body = {
+    contact: {
+      email: document.getElementById('cEmail').value,
+      phone: document.getElementById('cPhone').value,
+      social: document.getElementById('cSocial').value
+    }
+  };
+  await saveContent(body, 'contactMsg');
+}
+
+function renderTeam(){
+  const list = document.getElementById('teamList');
+  list.innerHTML = contentCache.team.map((m,i) => `
+    <div class="team-item">
+      <button class="remove-btn" onclick="removeTeamMember(${i})">Remove</button>
+      <div class="row">
+        <div><label>Initials</label><input value="${m.initials}" onchange="contentCache.team[${i}].initials=this.value"></div>
+        <div><label>Name</label><input value="${m.name}" onchange="contentCache.team[${i}].name=this.value"></div>
+      </div>
+      <label>Role</label><input value="${m.role}" onchange="contentCache.team[${i}].role=this.value">
+      <label>Bio</label><textarea onchange="contentCache.team[${i}].bio=this.value">${m.bio}</textarea>
+    </div>
+  `).join('');
+}
+function addTeamMember(){
+  contentCache.team.push({ initials:'XX', name:'New person', role:'Role', bio:'Short bio.' });
+  renderTeam();
+}
+function removeTeamMember(i){ contentCache.team.splice(i,1); renderTeam(); }
+async function saveTeam(){ await saveContent({ team: contentCache.team }, 'teamMsg'); }
+
+function renderTestimonials(){
+  const list = document.getElementById('testimonialList');
+  list.innerHTML = contentCache.testimonials.map((t,i) => `
+    <div class="testimonial-item">
+      <button class="remove-btn" onclick="removeTestimonial(${i})">Remove</button>
+      <label>Quote</label><textarea onchange="contentCache.testimonials[${i}].quote=this.value">${t.quote}</textarea>
+      <div class="row">
+        <div><label>Name</label><input value="${t.name}" onchange="contentCache.testimonials[${i}].name=this.value"></div>
+        <div><label>Company</label><input value="${t.company}" onchange="contentCache.testimonials[${i}].company=this.value"></div>
+      </div>
+    </div>
+  `).join('');
+}
+function addTestimonial(){
+  contentCache.testimonials.push({ quote:'New testimonial.', name:'Client name', company:'Company' });
+  renderTestimonials();
+}
+function removeTestimonial(i){ contentCache.testimonials.splice(i,1); renderTestimonials(); }
+async function saveTestimonials(){ await saveContent({ testimonials: contentCache.testimonials }, 'testimonialMsg'); }
+
+async function saveContent(body, msgId){
+  const msg = document.getElementById(msgId);
+  const r = await fetch('/api/content', { method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  if (r.ok){
+    msg.textContent = 'Saved.'; msg.className = 'msg ok show';
+    await loadAll();
+  } else {
+    msg.textContent = 'Failed to save.'; msg.className = 'msg err show';
+  }
+}
+
+checkAuth();
+</script>
+
+</body>
+</html>
